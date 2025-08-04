@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE Flask Demo</title>
+</head>
+<body>
+    <h1>Server-Sent Events Demo</h1>
+    <div id="time"></div>
+
+    <script>
+        const evtSource = new EventSource('/streaming');
+        const timeDiv = document.getElementById('time');
+        
+        evtSource.onmessage = function(event) {
+            timeDiv.textContent = event.data;
+        };
+        
+        evtSource.onerror = function(err) {
+            console.error("EventSource failed:", err);
+        };
+    </script>
+</body>
+</html>
