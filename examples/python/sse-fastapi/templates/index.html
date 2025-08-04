@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE FastAPI Demo</title>
+</head>
+<body>
+    <h1>Server-Sent Events Demo</h1>
+    <div id="time"></div>
+
+    <script>
+        // Create an EventSource instance to connect to the streaming endpoint
+        const evtSource = new EventSource('/streaming');
+        const timeDiv = document.getElementById('time');
+        
+        // Handle incoming messages
+        evtSource.onmessage = function(event) {
+            timeDiv.textContent = event.data;
+        };
+        
+        // Handle connection errors
+        evtSource.onerror = function(err) {
+            console.error("EventSource failed:", err);
+        };
+    </script>
+</body>
+</html>
