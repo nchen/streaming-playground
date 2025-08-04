@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSE Fastify Demo</title>
+</head>
+<body>
+    <h1>SSE Fastify Demo</h1>
+    <div id="events">Waiting for updates...</div>
+
+    <script>
+        const eventsDiv = document.getElementById('events');
+        const eventSource = new EventSource('/events');
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            eventsDiv.textContent = `Time: ${data.time}, Value: ${data.value}`;
+        };
+
+        eventSource.onerror = function(error) {
+            console.error('EventSource failed:', error);
+            eventSource.close();
+        };
+    </script>
+</body>
+</html>
